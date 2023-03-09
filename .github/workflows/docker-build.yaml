@@ -24,7 +24,7 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./nodejs-argo
           tags: "registry.devopsnow.io/public/opsverseio-examples/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
       - name: Push image
         run: docker push "registry.devopsnow.io/public/opsverseio-examples/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
