@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-argoservice
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-argoservice
+  template:
+    metadata:
+      labels:
+        app: nodejs-argoservice
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: server
+        image: registry.devopsnow.io/public/opsverseio-examples/nodejs-argo:8afb39cd
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-argoservice
+spec:
+  type: ClusterIP
+  selector:
+    app: nodejs-argoservice
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+---
