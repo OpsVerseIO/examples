@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: registry.devopsnow.io/public/opsverseio-examples/nodejs-argo:8afb39cd
+        image: registry.devopsnow.io/public/opsverseio-examples/nodejs-argo:bd42f60
         ports:
         - containerPort: 3000
         resources:
