@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: nodejs-argoservice
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: nodejs-argoservice
