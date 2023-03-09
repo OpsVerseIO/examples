@@ -1,0 +1,30 @@
+name: build-and-push
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      APP_NAME: nodejs-argo
+
+    steps:
+      - name: Add dynamic envs
+        run: |
+          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          registry: registry.devopsnow.io
+          username: ${{ secrets.REGISTRY_PUBLIC_ROBOT_USER }}
+          password: ${{ secrets.REGISTRY_PUBLIC_ROBOT_PASS }}
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          tags: "registry.devopsnow.io/public/${{ github.repository }}/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
+      - name: Push image
+        run: docker push "registry.devopsnow.io/public/${{ github.repository }}/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
