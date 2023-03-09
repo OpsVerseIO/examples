@@ -3,11 +3,10 @@ kind: Deployment
 metadata:
   name: nodejs-argoservice
 spec:
-  replicas: 3
-  strategy: Recreate
   selector:
     matchLabels:
       app: nodejs-argoservice
+  replicas: 2
   template:
     metadata:
       labels:
