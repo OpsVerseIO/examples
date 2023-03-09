@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: nodejs-argoservice
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: nodejs-argoservice
@@ -12,6 +11,7 @@ spec:
       labels:
         app: nodejs-argoservice
     spec:
+      replicas: 3
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
       containers:
