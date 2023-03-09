@@ -25,6 +25,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          tags: "registry.devopsnow.io/public/${{ github.repository }}/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
+          tags: "registry.devopsnow.io/public/opsverseio-examples/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
       - name: Push image
-        run: docker push "registry.devopsnow.io/public/${{ github.repository }}/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
+        run: docker push "registry.devopsnow.io/public/opsverseio-examples/${{ env.APP_NAME }}:${{ env.SHORT_SHA }}"
